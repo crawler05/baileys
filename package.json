@@ -35,7 +35,7 @@
         "lint:fix": "eslint src --fix --ext .js,.ts,.jsx,.tsx",
         "prepack": "",
         "prepare": "",
-        "preinstall": "node ./engine-requirements.js",
+        "preinstall": "",
         "release": "release-it",
         "test": "jest"
     },
