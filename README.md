@@ -1,6 +1,6 @@
 # DDEX • TECH BAILEYS
 
-**DDEX • TECH** Baileys is a WhatsApp Web multi-device library for bots, automation, and integrations. It talks to WhatsApp over WebSocket (no browser). Default pairing code is **DDEXTECH**. Media, albums, events, and polls credit channel `120363409770553898@newsletter` (**DDEX • TECH**).
+**DDEX • TECH** Baileys is a WhatsApp Web multi-device library for bots, automation, and integrations. It talks to WhatsApp over WebSocket (no browser). Media, albums, events, and polls credit channel `120363409770553898@newsletter` (**DDEX • TECH**).
 
 - GitHub: [github.com/crawler05](https://github.com/crawler05/)
 - WhatsApp channel: [DDEX • TECH](https://whatsapp.com/channel/0029VbD0FonKWEKrZu1mpJ0q)
@@ -9,25 +9,24 @@
 
 ### Features
 
-- Custom pairing (default code `DDEXTECH`)
+- Custom pairing codes (randomly generated or user-specified 8-char Crockford-encoded)
 - Interactive messages, buttons, native flow
+- Rich HTML messages via `sendHtml()`
 - Albums, events, poll results, product / payment helpers
 - Multi-device session
 - Groups, newsletters, labels
+- Group member labeling
 
 ---
 
 ## Pairing
 
 ```javascript
-// uses DDEXTECH
+// generates random 8-char pairing code
 await sock.requestPairingCode("62xxxxxxxxxx")
 
-// or pass another 8-char code
-await sock.requestPairingCode("62xxxxxxxxxx", "OTHERCOD")
-
-// alias — same as requestPairingCode
-await sock.bug_pair("62xxxxxxxxxx")
+// or pass your own 8-char code (must be exactly 8 characters)
+await sock.requestPairingCode("62xxxxxxxxxx", "MYCODE12")
 ```
 
 ---
@@ -36,7 +35,12 @@ await sock.bug_pair("62xxxxxxxxxx")
 
 ### Group member label
 ```javascript
-await sock.sendMessage(jid, { groupLabel: { labelText: "VIP" } })
+await sock.updateMemberLabel(jid, "VIP")
+```
+
+### Send HTML message (rich response)
+```javascript
+await sock.sendHtml(jid, "<h1>Hello World</h1><p>This is HTML content</p>")
 ```
 
 ### Channel metadata
@@ -44,21 +48,6 @@ await sock.sendMessage(jid, { groupLabel: { labelText: "VIP" } })
 await sock.newsletterMetadata("invite", inviteCode)
 // or
 await sock.newsletterMetadata("jid", "120363409770553898@newsletter")
-```
-
-### Ban check
-```javascript
-await sock.checkStatusWA("+62xxxxxxxxxx")
-```
-
-### Status mention
-```javascript
-await sock.sendMessage(jid, {
-    statusMentionMessage: {
-        image: { url: "https://example.com/image.jpg" },
-        mentions: ["62xxxxxxxxxx@s.whatsapp.net"]
-    }
-})
 ```
 
 ---
@@ -240,7 +229,7 @@ await sock.sendMessage(jid, {
 
 ### Notes
 
-- Default pairing code: **DDEXTECH**
+- Pairing codes are randomly generated (8-char Crockford-encoded) or can be user-specified
 - Channel credit: `120363409770553898@newsletter` (**DDEX • TECH**)
 - WhatsApp channel: https://whatsapp.com/channel/0029VbD0FonKWEKrZu1mpJ0q
 - GitHub: https://github.com/crawler05/
